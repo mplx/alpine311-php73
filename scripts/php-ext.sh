@@ -11,7 +11,7 @@ PHP_CONFIGDIR='/etc/php7/conf.d';
 function get_php_extension_config_file()
 {
     EXTENSION=$(echo "$1" | sed 's/^php7-//');
-    CONFIGFILE_NUMBERED=$(find "$PHP_CONFIGDIR" -name "*_$EXTENSION.ini" 2> /dev/null);
+    CONFIGFILE_NUMBERED=$(find "$PHP_CONFIGDIR" -regex ".*/[0-9][0-9]_$EXTENSION\.ini" 2> /dev/null);
     CONFIGFILE_DEFAULT=$(find "$PHP_CONFIGDIR" -name "$EXTENSION.ini" 2> /dev/null);
     if [ ! -z "$CONFIGFILE_NUMBERED" ]; then
         echo "$CONFIGFILE_NUMBERED";
